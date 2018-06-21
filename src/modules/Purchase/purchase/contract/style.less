@@ -1,0 +1,30 @@
+.form-card {
+  width: 100%;
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+  .card-title {
+    border-bottom: 1px #000000 dashed;
+    margin-bottom: 15px;
+  }
+}
+
+.form-card p {
+  padding-bottom: 10px;
+  font-size: 13px;
+  color: #118ee9;
+}
+
+.operate-btn {
+  text-align: right;
+  margin-bottom: 20px;
+  margin-right: 32px;
+}
+.contract-page {
+
+  :global { /* stylelint-disable-line */
+    .ant-pagination-options-size-changer.ant-select {
+      width: 100px !important;
+    }
+  }
+}

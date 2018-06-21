@@ -1,0 +1,37 @@
+.common-table {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  .left-tree {
+    float: left;
+    position: relative;
+    z-index: 1;
+    width: 300px;
+    overflow-x: auto;
+  }
+  .right-table {
+    float: right;
+    position: relative;
+    z-index: 0;
+    padding-left: 320px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: -100%;
+  }
+}
+.effect-area {
+  background-color: aliceblue;
+  padding: 10px;
+}
+
+.pop {
+  width: 300px;
+  word-break: break-all;
+  overflow-x: auto;
+}
+
+.c-table-center tr > th,
+.c-table-center tr > td {
+  text-align: center;
+}
+

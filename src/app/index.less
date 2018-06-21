@@ -1,0 +1,131 @@
+:global { /* stylelint-disable-line */
+  body {
+    //min-height: 768px;
+    //min-width: 1024px;
+  }
+
+  .search-form {
+    border-bottom: 1px dashed #e8e8e8;
+    margin: -24px -24px 24px;
+    padding: 24px 24px 0;
+  }
+
+  .operate-btn {
+    border-bottom: 1px dashed #e8e8e8;
+    margin: -24px -24px 24px;
+    padding: 24px;
+    text-align: right;
+  }
+
+  #root {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+    //.ant-menu-inline-collapsed {
+    //  a i {
+    //    margin-right: 32px;
+    //  }
+    //}
+  }
+
+  .ant-btn + .ant-btn,
+  a + .ant-btn,
+  .ant-btn + a {
+    margin-left: 12px;
+  }
+
+  //.ant-menu-inline .ant-menu-item, .ant-menu-vertical .ant-menu-item {
+  //  left: 0;
+  //}
+
+  .ant-menu-inline .ant-menu-item, .ant-menu-inline .ant-menu-submenu-title {
+    width: 100%;
+  }
+  .ant-menu-submenu-title {
+    color: #333333;
+    font-size: 14px;
+    font-family: Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, FZLanTingHeiS-L-G, "PingFang SC", "Microsoft YaHei";
+  }
+  .ant-menu-item {
+    color: #666666;
+    font-size: 13px;
+    font-family: Roboto, "Helvetica Neue", Helvetica, Tahoma, Arial, FZLanTingHeiS-L-G, "PingFang SC", "Microsoft YaHei";
+  }
+
+  .ant-card-extra {
+    padding: 12px 0;
+  }
+
+  .jc-modal-footer {
+    margin: 16px -16px 0;
+    border-top: 1px solid #e9e9e9;
+    padding: 16px 16px 0;
+    text-align: right;
+
+    button + button {
+      margin-left: 16px;
+    }
+  }
+
+  //textarea[required]:invalid,
+  textarea:focus:invalid {
+    box-shadow: none;
+  }
+
+  // ModalSelectInput
+  .input-plus {
+    .ant-input-affix-wrapper > .ant-input-suffix {
+      right: 0;
+      .input-plus-btn {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+
+  .vertical-line {
+    display: inline-block;
+    color: #595959;
+    width: 16px;
+    text-align: center;
+  }
+
+  .divider {
+    display: inline;
+    margin: 0 6px;
+    width: 1px;
+    border-left: 1px solid #595959;
+  }
+
+  .ant-form, .form-detail {
+    .ant-card {
+      border: none;
+
+      .ant-card-head {
+        border-left: 4px solid #099cef;
+        border-bottom: none;
+        border-radius: 0;
+        min-height: 24px;
+
+        .ant-card-head-title {
+          padding: 0;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+
+  .ant-card {
+    .ant-card-body {
+      padding: 12px 12px 6px;
+    }
+  }
+
+  .margin-left {
+    margin-left: 12px;
+  }
+  .margin-right {
+    margin-right: 12px;
+  }
+}

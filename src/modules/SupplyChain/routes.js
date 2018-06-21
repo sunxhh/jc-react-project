@@ -1,0 +1,53 @@
+import * as urls from 'Global/urls'
+import { RouteHelper } from 'Utils/helper'
+import SupplyChainModule from 'bundle-loader?lazy!./index'
+
+const genRoute = (path, breadcrumbName, parentPath = urls.HOME) =>
+  RouteHelper.genRoute(path, breadcrumbName, SupplyChainModule, parentPath)
+
+export default [
+  genRoute(urls.SUPPLY_CHAIN_MODULE, '供应链'),
+  genRoute(urls.SUPPLY_DEPOT_WATCH, '保质期监控'),
+  genRoute(urls.SUPPLY_DEPOT_GOODS, '仓库货物'),
+  genRoute(`${urls.SUPPLY_DEPOT_GOODS_DETAIL}/:id`, '货物详情', urls.SUPPLY_DEPOT_GOODS),
+  genRoute(urls.SUPPLY_DEPOT_LIBRARY, '库位设置'),
+  genRoute(urls.SUPPLY_DEPOT_RESERVOIR, '库区设置'),
+  genRoute(urls.SUPPLY_SORTLOGISTICS_MANAGE, '分拣单管理（物流）'),
+  genRoute(urls.SUPPLY_SORT_MANAGE, '分拣单管理'),
+  genRoute(`${urls.SUPPLY_SORT_DETAIL}/:id`, '详情', urls.SUPPLY_SORT_MANAGE),
+  genRoute(`${urls.SUPPLY_SORT_BEGINORCONTINUE}/:id`, '开始分拣', urls.SUPPLY_SORT_MANAGE),
+  genRoute(`${urls.SUPPLY_SORT_CONTINUE}/:id`, '继续分拣', urls.SUPPLY_SORT_MANAGE),
+  genRoute(urls.SUPPLY_STOCK_RECORD, '操作记录'),
+  genRoute(urls.SUPPLY_STOCK_CHECK, '库存查询'),
+  genRoute(urls.SUPPLY_STOCK_OPERATE, '库存操作'),
+  genRoute(urls.SUPPLY_STOCK_OPERATE_INBOUND_NEW, '创建入库单', urls.SUPPLY_STOCK_OPERATE),
+  genRoute(urls.SUPPLY_STOCK_OPERATE_INBOUND_EDIT, '编辑入库单', urls.SUPPLY_STOCK_OPERATE),
+  genRoute(urls.SUPPLY_STOCK_OPERATE_INBOUND_INFO, '入库单详情', urls.SUPPLY_STOCK_OPERATE),
+  genRoute(urls.SUPPLY_STOCK_OPERATE_RETURN, '采购退货', urls.SUPPLY_STOCK_OPERATE),
+  genRoute(urls.SUPPLY_STOCK_OPERATE_OUTBOUND_NEW, '创建出库单', urls.SUPPLY_STOCK_OPERATE),
+  genRoute(urls.SUPPLY_STOCK_OPERATE_OUTBOUND_EDIT, '编辑出库单', urls.SUPPLY_STOCK_OPERATE),
+  genRoute(urls.SUPPLY_STOCK_OPERATE_OUTBOUND_INFO, '出库单详情', urls.SUPPLY_STOCK_OPERATE),
+  genRoute(urls.SUPPLY_STOCK_INVENTORY, '库存盘点'),
+  genRoute(urls.SUPPLY_STOCK_INVENTORY_ENTRY, '进入盘点', urls.SUPPLY_STOCK_INVENTORY),
+  genRoute(urls.SUPPLY_STOCK_INVENTORY_INFO, '盘点详情', urls.SUPPLY_STOCK_INVENTORY),
+  genRoute(urls.SUPPLY_STOCK_DIFFERENCE, '盘点少货差异'),
+  genRoute(urls.SUPPLY_STOCK_DIFFERENCE_EDIT, '差异处理', urls.SUPPLY_STOCK_DIFFERENCE),
+  genRoute(urls.SUPPLY_STOCK_DIFFERENCE_INFO, '差异详情', urls.SUPPLY_STOCK_DIFFERENCE),
+  genRoute(urls.SUPPLY_STOCK_THRESHOLD, '预警设置'),
+  genRoute(urls.SUPPLY_ORDER, '订单管理'),
+  genRoute(urls.SUPPLY_ORDER_EORDER, '业务订单'),
+  genRoute(urls.SUPPLY_ORDER_DETAIL, '业务订单详情', urls.SUPPLY_ORDER_EORDER),
+  genRoute(urls.SUPPLY_CATE_ORDER, '调拨订单'),
+  genRoute(urls.SUPPLY_CATE_ORDER_ADD, '创建调拨', urls.SUPPLY_CATE_ORDER),
+  genRoute(urls.SUPPLY_CATE_ORDER_EDIT, '调拨订单编辑', urls.SUPPLY_CATE_ORDER),
+  genRoute(urls.SUPPLY_CATE_DETAIL, '调拨详情', urls.SUPPLY_CATE_ORDER),
+  genRoute(urls.SUPPLY_BIND_SHOP, '店铺仓库绑定'),
+  genRoute(urls.SUPPLY_BIND_CITY, '仓库城市绑定'),
+  genRoute(urls.SUPPLY_REPORT, '报表管理'),
+  genRoute(urls.SUPPLY_REPORT_COST, '移动加权成本', urls.SUPPLY_REPORT),
+  genRoute(urls.SUPPLY_LOGISTICS, '物流管理'),
+  genRoute(urls.SUPPLY_LOGISTICS_SHOP, '店铺绑定物流'),
+  genRoute(urls.SUPPLY_LOGISTICS_WAYBILL_DETAIL, '运单查询'),
+  genRoute(urls.SUPPLY_IMPORT, '导入管理'),
+  genRoute(urls.SUPPLY_IMPORT_OPERATE, '导入操作', urls.SUPPLY_IMPORT),
+]

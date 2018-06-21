@@ -1,0 +1,74 @@
+
+.inventory {
+  .title {
+    text-align: center;
+    margin: 30px;
+    display: none;
+  }
+
+  .filter {
+    margin-bottom: 15px;
+
+    .operate_group {
+      margin-left: 30px;
+    }
+
+    :global { /* stylelint-disable-line */
+      span + span {
+        margin-left: 24px;
+      }
+
+      .ant-radio-group {
+        margin-top: 24px;
+        .ant-radio-button-wrapper {
+          min-width: 120px;
+          text-align: center;
+          span + span {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+
+    .ant-select {
+      margin-right: 12px;
+    }
+  }
+
+  @media print {
+    .title {
+      display: block;
+    }
+
+    .operate_group {
+      display: none;
+    }
+
+    .statistic {
+      display: none;
+    }
+  }
+}
+
+.btn-style {
+  position: absolute;
+  bottom: 15px;
+  margin-top: 15px;
+  right: 0;
+  width: auto;
+  height: auto;
+  button {
+    margin-right: 10px;
+  }
+}
+.statistic {
+  text-align: right;
+  font-size: 14px;
+  margin-top: 10px;
+  &_number {
+    font-size: 24px;
+    margin-left: 12px;
+    margin-right: 20px;
+  }
+}
+

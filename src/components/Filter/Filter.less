@@ -1,0 +1,45 @@
+
+.filter {
+  margin-bottom: 12px;
+
+  > div {
+    display: inline-block;
+    overflow: auto;
+
+    &::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    > span {
+      float: left;
+      height: 54px;
+      padding-top: 8px;
+    }
+  }
+
+  &_item_wrapper {
+    display: inline-block;
+    white-space: nowrap;
+    margin: 0 12px 0 6px;
+    line-height: 54px;
+
+    :global { /* stylelint-disable-line */
+      .ant-form-item {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &_btns {
+    height: 54px;
+    padding-top: 4px;
+    overflow: hidden !important;
+  }
+
+  &_input {
+    min-width: 200px;
+    max-width: 300px;
+  }
+}

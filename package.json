@@ -1,0 +1,107 @@
+{
+  "name": "jc-industry-admin",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@dx-groups/arthur": "1.0.7",
+    "antd": "3.5.2",
+    "axios": "^0.16.2",
+    "babel-preset-env": "^1.7.0",
+    "bundle-loader": "^0.5.6",
+    "classnames": "^2.2.5",
+    "draftjs-to-html": "^0.8.4",
+    "history": "^4.7.2",
+    "html-to-draftjs": "^1.3.0",
+    "immutable": "^3.7.4",
+    "is-plain-object": "^2.0.4",
+    "moment": "2.19.3",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "react-draft-wysiwyg": "^1.12.11",
+    "react-hot-loader": "^4.3.0",
+    "react-redux": "5.0.5",
+    "react-router": "4.2.0",
+    "react-router-dom": "4.2.0",
+    "react-router-redux": "5.0.0-alpha.9",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.3.2",
+    "redux-logger": "^3.0.6",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0",
+    "slick-carousel": "^1.8.1"
+  },
+  "devDependencies": {
+    "@dx-groups/athena": "2.0.9",
+    "babel-plugin-import": "^1.7.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint-plugin-flowtype": "2.34.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "5.0.3",
+    "eslint-plugin-prettier": "^2.1.2",
+    "eslint-plugin-react": "7.1.0",
+    "xiaoyaoji-mock-server": "^1.0.0"
+  },
+  "scripts": {
+    "start": "athena start",
+    "build": "athena build",
+    "analyze": "ATHENA_ENV_BUILD_ENV=test athena build --report",
+    "test": "athena test --env=jsdom",
+    "lint": "athena lint src",
+    "lint-fix": "athena lint-fix src",
+    "mock": "xiaoyaoji-mock-server --file=xiaoyaoji.json --prefix='$admin-prefix$','$prefix$'",
+    "build:dev": "ATHENA_ENV_BUILD_ENV=dev athena build",
+    "build:test": "ATHENA_ENV_BUILD_ENV=test athena build",
+    "build:pre": "ATHENA_ENV_BUILD_ENV=pre athena build",
+    "validate": "npm ls"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.js?(x)",
+      "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web"
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "json",
+      "web.jsx",
+      "jsx"
+    ]
+  },
+  "proxy": {
+    "/api/card": {
+      "target": "http://localhost:5000",
+      "changeOrigin": true
+    },
+    "/api/sys/org/orgByIndustry": {
+      "target": "http://dev-wapi-industry.dx-groups.com",
+      "changeOrigin": true
+    },
+    "/api": {
+      "target": "http://dev-wapi-industry.dx-groups.com",
+      "changeOrigin": true
+    }
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}

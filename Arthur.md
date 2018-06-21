@@ -29,35 +29,49 @@ Mock 工具现在可以使用针对小幺鸡的自动化 mock 工具 [xiaoyaoji-
 ├── index.js                    # 模块入口文件，做路由分割用
 ├── menu.js                     # 模块页面菜单及权限配置文件 最终信息汇总至 ‘src/global/menuCodes.js’ 只有一个
 ├── routes.js                   # 模块路由配置文件，最终信息汇总至 ‘src/routes.js’ 只有一个
-└── reduck.js                   # 默认导出 reducers，该模块用到的 reducer 列表，只有一个
+└── module.js                   # 模块化配置文件，指定 state 等信息，只有一个
 ```
 
-### `Reduck` 模式
+### `arthur` 模式
 
-每个子模块中均有个一 `reduck.js` 文件，该文件的基本格式如下：
+每个子模块中均有个一 `module.js` 文件，该文件的基本格式如下：
 
 ```javascript
-import fetchData from 'Utils/fetch'
-import apis from '../apis'
-
 // ===========================> Action Types <=========================== //
 
-// ===========================> Actions <=========================== //
+export default {
+  namespace: 'page',
 
-// ===========================> Reducer <=========================== //
+  state: {
+    data: 'old'
+  },
 
-const initialState = {}
+  actions: {
+    getCheckList(arg) {
+      return dispatch => {
+        dispatch({
+          type: GET_PAGE_LIST,
+          payload: 'new'
+        })
+      }
+    }
+  },
 
-export const reducer = function (state = initialState, action) {
-  switch (action.type) {
-    // ...
-    default:
-      return state
-  }
+  reducers: {
+    [GET_PAGE_LIST]: (state, action) => ({
+      ...state,
+      data: action.payload,
+    })
+  },
+
+  children: [
+
+  ]
 }
+
 ```
 
-这是采用了一种称为 "鸭子模式" 的思想，将该模块的所有 redux 相关操作放在单独的文件中维护，契合我们拆分 module 的需要。
+参考 dva 的写法，相比之前采用的 reduck 模式，项目/数据 结构更为清晰，并且减少了冗余代码。
 
 ### 菜单配置
 
@@ -213,7 +227,7 @@ fetchData(dispatch, SHOW_LIST_SPIN)(api, args)
 
 根据三者的数据流向，可以生成一些通用的模板，方便大家实现列表页面，具体规则如下：
 
-### `reduck.js`
+### `module.js`
 
 ```javascript
 import { createAction } from 'redux-actions'
@@ -226,29 +240,31 @@ import { message } from 'antd'
 
 const GET_CHECK_LIST = 'spa/SupplyChain/depotStock/GET_CHECK_LIST'  // 库存查询
 
-// ===========================> Actions <=========================== //
 
-export const getCheckList = arg =>
- ReduckHelper.genListAction(arg, fetchData, apis.depot.stock.check, GET_CHECK_LIST)
+export default {
+  namespace: 'page',
 
-// ===========================> Reducer <=========================== //
+  state: {
+    ...ReduckHelper.genListState('check', { // 注入除 page 以外的参数
+      skuNo: '',
+      goodsName: '',
+      // ...
+    })
+  },
 
-const initialState = {
-  ...ReduckHelper.genListState('check', { // 注入除 page 以外的参数
-    skuNo: '',
-    goodsName: '',
-    // ...
-  })
-}
+  actions: {
+    getCheckList(arg) {
+      return ReduckHelper.genListAction(arg, fetchData, apis.depot.stock.check, GET_CHECK_LIST)
+    }
+  },
 
-export const reducer = function (state = initialState, action) {
-  switch (action.type) {
-    // ...
-    case GET_CHECK_LIST:
-      return ReduckHelper.resolveListState('check', state, action.payload)
-    default:
-      return state
-  }
+  reducers: {
+    [GET_PAGE_LIST]: (state, action) => ReduckHelper.resolveListState('check', state, action.payload)
+  },
+
+  children: [
+
+  ]
 }
 ```
 
@@ -256,7 +272,7 @@ export const reducer = function (state = initialState, action) {
 
 ```javascript
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { connect } from 'arthur'
 import { Table, Button } from 'antd'
 
 import * as urls from 'Global/urls'
@@ -349,20 +365,17 @@ class StockCheck extends Component {
 }
 
 const mapStateToProps = (state) => {
+  const showListSpin = state['common.showListSpin']
+  const checkProps = state[''supplyChain.depotStock'']
   return {
-    showListSpin: state.common.showListSpin,
-
-    list: state.supplyChain.depotStock.checkList,
-    filter: state.supplyChain.depotStock.checkFilter,
-    page: state.supplyChain.depotStock.checkPage,
+    showListSpin,
+    list: checkProps.checkList,
+    filter: checkProps.checkFilter,
+    page: checkProps.checkPage,
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatch
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(StockCheck)
+export default connect(['common.showListSpin', 'supplyChain.depotStock'], mapStateToProps)(StockCheck)
 
 ```
 

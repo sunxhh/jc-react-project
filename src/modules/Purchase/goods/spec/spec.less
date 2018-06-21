@@ -1,0 +1,20 @@
+.spec {
+  display: flex;
+  margin-top: 10px;
+
+.detail {
+    width: 75%;
+    padding: 0 0 0 30px;
+
+    :global { /* stylelint-disable-line */
+      .ant-table-title {
+        padding-top: 13px;
+      }
+    }
+  }
+}
+
+.tree-wrap {
+  max-height: 400px;
+  overflow: auto;
+}
